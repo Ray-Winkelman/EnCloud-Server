@@ -1,2 +1,3 @@
-# dmonger
-A data driven app that users customize to track and store data of their choice.
+# EnCloud Server Component
+
+A UI to view encrypted file lists, and download uploaded files.
