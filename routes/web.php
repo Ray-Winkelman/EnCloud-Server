@@ -16,25 +16,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/test', function () {
-    return view('test');
+Route::get('bro', function()
+{
+    return 'Bro!';
 });
 
-Route::post('register', 'Auth\RegisterController@register');
+Auth::routes();
 
-Route::get('/check', function () {
-    if (Auth::check()) {
-        return view('test');
-    }
-    else {
-        return view('welcome');
-    }
-});
-
-Route::get('/middle', function () {
-    // Only authenticated users may enter...
-})->middleware('auth');
-
-Route::get('/login', function() {
-    return view('login');
-})->name('login');
+Route::get('/home', 'HomeController@index');
