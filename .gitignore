@@ -88,9 +88,5 @@ https://github.com/rocketeers/rocketeer
 
 /node_modules
 /public/storage
-/vendor
 /.idea
-Homestead.json
-Homestead.yaml
-.env
 /apachelogs
