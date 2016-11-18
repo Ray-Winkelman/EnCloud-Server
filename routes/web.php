@@ -12,15 +12,31 @@ use Illuminate\Auth\Middleware\Authenticate;
 |
 */
 
-Route::get('/', function () {
+Auth::routes();
+
+
+Route::any('/', function () {
     return view('welcome');
 });
 
-Route::get('bro', function()
-{
-    return 'Bro!';
+Route::any('home', function () {
+    return view('home');
+})->middleware('auth');
+
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::group(['prefix' => 'files'], function () {
+        Route::get('/', 'FilesController@index');
+        Route::post('/', 'FilesController@post');
+        Route::put('/', 'FilesController@put');
+        Route::delete('/', 'FilesController@delete');
+
+        Route::get('/{file}', function (File $file) {
+            return $file;
+        });
+    });
+
+    Route::any('upload', function () {
+        return view('upload');
+    });
 });
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index');

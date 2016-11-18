@@ -11,17 +11,16 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
+    <link href="/thirdparty/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/app.css" rel="stylesheet">
     <link href="/css/encloud.css" rel="stylesheet">
 
-    <!--<link href="/thirdparty/bootstrap/css/bootstrap.min.css" rel="stylesheet">-->
-
     <!-- Scripts -->
     <script>
-        window.Laravel = <?php echo json_encode([
-                                                        'csrfToken' => csrf_token(),
-                                                ]); ?>
+        window.Laravel = <?php echo json_encode(['csrfToken' => csrf_token()]); ?>
     </script>
+
+    @stack('styles')
 </head>
 <body>
 <div id="app">
@@ -38,7 +37,7 @@
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ url('/home') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
             </div>
@@ -56,25 +55,11 @@
                         <li><a href="{{ url('/login') }}">Login</a></li>
                         <li><a href="{{ url('/register') }}">Register</a></li>
                     @else
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span>
-                            </a>
-
-                            <ul class="dropdown-menu" role="menu">
-                                <li>
-                                    <a href="{{ url('/logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        Logout
-                                    </a>
-
-                                    <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                                        {{ csrf_field() }}
-                                    </form>
-                                </li>
-                            </ul>
-                        </li>
+                        <li><a href="{{ url('/logout') }}" onclick="event.preventDefault();
+                               document.getElementById('logout-form').submit();">Logout</a></li>
+                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
                     @endif
                 </ul>
             </div>
@@ -92,7 +77,9 @@
 </footer>
 
 <!-- Scripts -->
-<!--<script src="/js/app.js"></script>-->
+<script src="/thirdparty/jquery/jquery-3.1.1.min.js"></script>
 <script src="/thirdparty/bootstrap/js/bootstrap.min.js"></script>
+@stack('scripts')
+
 </body>
 </html>

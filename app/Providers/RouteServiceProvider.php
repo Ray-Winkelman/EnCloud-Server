@@ -23,7 +23,8 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Route::pattern('file', '[0-9]+');
+        Route::model('file', File::class);
 
         parent::boot();
     }
