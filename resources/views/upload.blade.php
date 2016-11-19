@@ -10,7 +10,9 @@
                     <div class="panel-body">
                         <label class="control-label">Select File</label>
                         {{ Form::open(array('action' => 'FilesController@post', 'files' => true)) }}
-                        <input id="file" type="file" class="file">
+                        {{ Form::file('file') }}
+                        <!--<input id="file" type="file" class="file">-->
+                        {{ Form::submit('Upload') }}
                         {{ Form::token() }}
                         {{ Form::close() }}
                     </div>

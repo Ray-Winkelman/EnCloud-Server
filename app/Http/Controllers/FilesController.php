@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Crypt;
+use App\UserFile;
+use Symfony\Component\Finder\SplFileInfo;
 
 class FilesController extends Controller
 {
@@ -19,12 +22,28 @@ class FilesController extends Controller
 
     public function post(Request $request)
     {
-        $filename = $request->file;
-        $contents = File::get($filename);
+        $contents = File::get($request->file->getPathName());
+        
         $encrypted = Crypt::encrypt($contents);
 
-        $file = new File($encrypted);
+        $file = new UserFile($encrypted);
         $file->save();
+    }
+
+    public function get(UserFile $file)
+    {
+        $decrypted = Crypt::decrypt($file->contents);
+
+        $temp_file = tempnam(sys_get_temp_dir(), 'Tmp');
+
+        $bytes_written = File::put($temp_file, $decrypted);
+
+        if ($bytes_written !== false)
+        {
+            return response()->file($temp_file);
+        }
+
+        return 0;
     }
 
     public function put(Request $request)

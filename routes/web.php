@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Auth\Middleware\Authenticate;
+use App\UserFile;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,9 +32,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::put('/', 'FilesController@put');
         Route::delete('/', 'FilesController@delete');
 
-        Route::get('/{file}', function (File $file) {
-            return $file;
-        });
+        Route::get('/{file}', 'FilesController@get');
     });
 
     Route::any('upload', function () {
