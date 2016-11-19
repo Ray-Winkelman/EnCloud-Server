@@ -1,24 +1,27 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Upload Your File(s).</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Upload Your File(s).</div>
 
-                <div class="panel-body">
-                    <label class="control-label">Select File</label>
-                    <input id="input-1" type="file" class="file">
+                    <div class="panel-body">
+                        <label class="control-label">Select File</label>
+                        {{ Form::open(array('action' => 'FilesController@post', 'files' => true)) }}
+                        <input id="file" type="file" class="file">
+                        {{ Form::token() }}
+                        {{ Form::close() }}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection
 
 @push('styles')
-<link href="/thirdparty/bootstrap-fileinput/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+<link href="/thirdparty/bootstrap-fileinput/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css"/>
 @endpush
 
 @push('scripts')
@@ -29,6 +32,6 @@
 
 <script>
     $("#input-id").fileinput();
-    $("#input-id").fileinput({'showUpload':false, 'previewFileType':'any'});
+    $("#input-id").fileinput({'showUpload': false, 'previewFileType': 'any'});
 </script>
 @endpush
