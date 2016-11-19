@@ -29,6 +29,8 @@ class FilesController extends Controller
         $file->contents = $encrypted;
         $file->filename = $request->file->getFilename();
         $file->save();
+
+        return redirect('home');
     }
 
     public function get(UserFile $file)

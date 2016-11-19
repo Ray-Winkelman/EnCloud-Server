@@ -13,7 +13,6 @@
                         {{ Form::file('file') }}
                         <!--<input id="file" type="file" class="file">-->
                         {{ Form::submit('Upload') }}
-                        {{ Form::token() }}
                         {{ Form::close() }}
                     </div>
                 </div>
@@ -33,7 +32,7 @@
 <script src="/thirdparty/bootstrap-fileinput/js/fileinput.min.js"></script>
 
 <script>
-    $("#input-id").fileinput();
-    $("#input-id").fileinput({'showUpload': false, 'previewFileType': 'any'});
+    $("input[type='file']").fileinput();
+    $("input[type='file']").fileinput({'showUpload': false, 'previewFileType': 'any'});
 </script>
 @endpush

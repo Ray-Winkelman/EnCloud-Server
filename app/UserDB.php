@@ -14,7 +14,7 @@ class UserDB
 
         DB::connection()->statement('CREATE DATABASE ' . $userDB);
 
-        Schema::create($userDB . '.userfile', function (Blueprint $table){
+        Schema::create($userDB . '.user_files', function (Blueprint $table){
             $table->increments('id');
             $table->longText('contents');
             $table->string('filename');

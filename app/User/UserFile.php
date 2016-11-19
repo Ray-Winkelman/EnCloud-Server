@@ -2,8 +2,9 @@
 
 namespace EnCloud\User;
 
+use EnCloud\UserModel;
+
 class UserFile extends UserModel
 {
-    public $contents;
-    public $filename;
+    protected $fillable = ['contents', 'filename'];
 }
