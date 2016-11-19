@@ -172,11 +172,11 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        EnCloud\Providers\AppServiceProvider::class,
+        EnCloud\Providers\AuthServiceProvider::class,
+        // EnCloud\Providers\BroadcastServiceProvider::class,
+        EnCloud\Providers\EventServiceProvider::class,
+        EnCloud\Providers\RouteServiceProvider::class,
 
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,

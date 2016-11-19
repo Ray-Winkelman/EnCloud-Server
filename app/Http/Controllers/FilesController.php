@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace EnCloud\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Crypt;
-use App\UserFile;
-use Symfony\Component\Finder\SplFileInfo;
+use EnCloud\User\UserFile;
 
 class FilesController extends Controller
 {
@@ -23,10 +22,12 @@ class FilesController extends Controller
     public function post(Request $request)
     {
         $contents = File::get($request->file->getPathName());
-        
+
         $encrypted = Crypt::encrypt($contents);
 
-        $file = new UserFile($encrypted);
+        $file = new UserFile();
+        $file->contents = $encrypted;
+        $file->filename = $request->file->getFilename();
         $file->save();
     }
 
@@ -48,6 +49,10 @@ class FilesController extends Controller
 
     public function put(Request $request)
     {
+//        $flights = UserFile::where('active', 1)
+//                             ->orderBy('name', 'desc')
+//                             ->take(10)
+//                             ->get();
         return 0;
     }
 
