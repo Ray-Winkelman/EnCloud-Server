@@ -5,6 +5,7 @@ namespace EnCloud\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Validator;
 use EnCloud\User\UserFile;
 
 class FilesController extends Controller
@@ -16,34 +17,51 @@ class FilesController extends Controller
 
     public function index()
     {
-        return view('files');
+        $files = UserFile::orderBy('updated_at', 'desc')->paginate(15);
+
+        return view('files')->with('files', $files);
     }
 
     public function post(Request $request)
     {
-        $contents = File::get($request->file->getPathName());
+        $validator = Validator::make($request->all(), [
+            'file' => 'max:10240',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('home')->with('error', 'Uploads can\'t exceed 10mb. :(');
+        }
+
+        $contents = File::get($_FILES['file']['tmp_name']);
 
         $encrypted = Crypt::encrypt($contents);
 
         $file = new UserFile();
         $file->contents = $encrypted;
-        $file->filename = $request->file->getFilename();
+        $file->filename = $_FILES['file']['name'];
+        $file->type = $_FILES['file']['type'];
+        $file->size = $_FILES['file']['size'];
         $file->save();
 
-        return redirect('home');
+        return redirect('home')->with('status', 'Success. :)');
     }
 
     public function get(UserFile $file)
     {
         $decrypted = Crypt::decrypt($file->contents);
 
-        $temp_file = tempnam(sys_get_temp_dir(), 'Tmp');
+        $path = sys_get_temp_dir() . '/' . $file->filename;
 
-        $bytes_written = File::put($temp_file, $decrypted);
+        if(file_exists($path))
+        {
+            unlink($path);
+        }
+
+        $bytes_written = File::put($path, $decrypted);
 
         if ($bytes_written !== false)
         {
-            return response()->file($temp_file);
+            return response()->download($path);
         }
 
         return 0;
@@ -51,10 +69,6 @@ class FilesController extends Controller
 
     public function put(Request $request)
     {
-//        $flights = UserFile::where('active', 1)
-//                             ->orderBy('name', 'desc')
-//                             ->take(10)
-//                             ->get();
         return 0;
     }
 

@@ -14,10 +14,13 @@ class UserDB
 
         DB::connection()->statement('CREATE DATABASE ' . $userDB);
 
-        Schema::create($userDB . '.user_files', function (Blueprint $table){
+        Schema::create($userDB . '.user_files', function (Blueprint $table)
+        {
             $table->increments('id');
             $table->longText('contents');
-            $table->string('filename');
+            $table->string('filename', 80);
+            $table->string('type', 80);
+            $table->integer('size');
             $table->timestamps();
         });
     }

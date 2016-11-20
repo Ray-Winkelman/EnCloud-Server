@@ -10,9 +10,8 @@
                     <div class="panel-body">
                         <label class="control-label">Select File</label>
                         {{ Form::open(array('action' => 'FilesController@post', 'files' => true)) }}
-                        {{ Form::file('file') }}
-                        <!--<input id="file" type="file" class="file">-->
-                        {{ Form::submit('Upload') }}
+                        {{ Form::file('file', ['id'=>'file']) }}
+                        {{ Form::submit('Upload', ['class'=>'btn btn-large btn-primary btn-right']) }}
                         {{ Form::close() }}
                     </div>
                 </div>
@@ -32,7 +31,7 @@
 <script src="/thirdparty/bootstrap-fileinput/js/fileinput.min.js"></script>
 
 <script>
-    $("input[type='file']").fileinput();
-    $("input[type='file']").fileinput({'showUpload': false, 'previewFileType': 'any'});
+    $("#file").fileinput();
+    $("#file").fileinput({'showUpload': false, 'previewFileType': 'any'});
 </script>
 @endpush

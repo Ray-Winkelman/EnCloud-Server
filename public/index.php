@@ -7,6 +7,28 @@
  * @author   Taylor Otwell <taylor@laravel.com>
  */
 
+
+/*
+|--------------------------------------------------------------------------
+| Ray's Custom Shit
+|--------------------------------------------------------------------------
+|
+| This app is a beast so I overwrite some default PHP settings here.
+|
+*/
+
+//ini_set('memory_limit', '16G');
+//ini_set('upload_max_filesize', '10M');
+//ini_set('post_max_size', '100M');
+//ini_set('innodb_log_file_size', '256M');
+
+
+// Run these in MySQL
+//set global net_buffer_length=1000000;
+//set global max_allowed_packet=1000000000;
+//SET GLOBAL innodb_fast_shutdown = 0;
+
+
 /*
 |--------------------------------------------------------------------------
 | Register The Auto Loader

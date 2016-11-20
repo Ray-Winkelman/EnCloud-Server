@@ -5,3 +5,17 @@
     height: 60px;
     line-height: 60px;
 }
+
+.pagination{
+    margin-bottom: 0;
+}
+
+.pagination-div {
+    margin: auto;
+    text-align: center;
+}
+
+.btn-right {
+    margin-top: 24px;
+    float: right;
+}
