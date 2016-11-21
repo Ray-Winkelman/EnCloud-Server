@@ -8,13 +8,9 @@
                 <div class="panel-heading">Hi, {{ Auth::user()->name }}.</div>
 
                 <div class="panel-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @elseif(session('error'))
-                        <div class="alert alert-danger">
-                            {{ session('error') }}
+                    @if (session('alert'))
+                        <div class="alert alert-{{ session('alert')[0] }}">
+                            {{ session('alert')[1] }}
                         </div>
                     @else
                         <p>What should we do today?</p>

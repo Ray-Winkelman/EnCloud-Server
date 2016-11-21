@@ -8,6 +8,13 @@
                     <div class="panel-heading">Upload Your File(s).</div>
 
                     <div class="panel-body">
+
+                        @if (session('alert'))
+                            <div class="alert alert-{{ session('alert')[0] }}">
+                                {{ session('alert')[1] }}
+                            </div>
+                        @endif
+
                         <label class="control-label">Select File</label>
                         {{ Form::open(array('action' => 'FilesController@post', 'files' => true)) }}
                         {{ Form::file('file', ['id'=>'file']) }}

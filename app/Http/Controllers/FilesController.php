@@ -29,7 +29,7 @@ class FilesController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect('home')->with('error', 'Uploads can\'t exceed 10mb. :(');
+            return redirect('upload')->with('alert', ['danger', 'Uploads can\'t exceed 10mb. :(']);
         }
 
         $contents = File::get($_FILES['file']['tmp_name']);
@@ -43,7 +43,7 @@ class FilesController extends Controller
         $file->size = $_FILES['file']['size'];
         $file->save();
 
-        return redirect('home')->with('status', 'Success. :)');
+        return redirect('upload')->with('alert', ['success','Successfully encrypted. :)']);
     }
 
     public function get(UserFile $file)
@@ -64,7 +64,7 @@ class FilesController extends Controller
             return response()->download($path);
         }
 
-        return 0;
+        return redirect('files')->with('alert', ['danger','That file could not be decrypted. Try again soon. :(']);
     }
 
     public function put(Request $request)
