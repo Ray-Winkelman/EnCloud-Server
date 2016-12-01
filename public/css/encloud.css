@@ -1,3 +1,11 @@
+body {
+    background: url(../img/bg.jpg) no-repeat bottom center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
 .footer {
     position: absolute;
     bottom: 0;
@@ -18,4 +26,18 @@
 .btn-right {
     margin-top: 24px;
     float: right;
+}
+
+.content {
+    padding-top: 100px;
+}
+
+.light {
+    font-weight: 400;
+}
+
+.navbar-brand:hover {
+    color: rgba(255, 255, 255, 0.8);
+    outline: none;
+    background-color: transparent;
 }

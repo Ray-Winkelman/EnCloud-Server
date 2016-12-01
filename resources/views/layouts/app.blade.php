@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="/thirdparty/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/grayscale.css" rel="stylesheet">
     <link href="/css/app.css" rel="stylesheet">
     <link href="/css/encloud.css" rel="stylesheet">
 
@@ -23,51 +24,53 @@
     @stack('styles')
 </head>
 <body>
-<div id="app">
-    <nav class="navbar navbar-default navbar-static-top">
+<div id="app" data-spy="scroll" data-target=".navbar-fixed-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
-
-                <!-- Collapsed Hamburger -->
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                    <span class="sr-only">Toggle Navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    Menu <i class="fa fa-bars"></i>
                 </button>
-
-                <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/home') }}">
-                    {{ config('app.name', 'Laravel') }}
+                <a class="navbar-brand page-scroll" href="{{ url('/home') }}">
+                    <i class="fa fa-play-circle"></i> <span class="light">En</span>Cloud
                 </a>
             </div>
 
-            <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                <!-- Left Side Of Navbar -->
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
                 <ul class="nav navbar-nav">
-                    &nbsp;
-                </ul>
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <li class="hidden">
+                        <a href="{{ url('/home') }}"></a>
+                    </li>
 
-                <!-- Right Side Of Navbar -->
-                <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
                     @if (Auth::guest())
                         <li><a href="{{ url('/login') }}">Login</a></li>
                         <li><a href="{{ url('/register') }}">Register</a></li>
                     @else
+                        <li><a href="{{ url('/upload') }}">Upload</a></li>
+                        <li><a href="{{ url('/files') }}">Files</a></li>
                         <li><a href="{{ url('/logout') }}" onclick="event.preventDefault();
                                document.getElementById('logout-form').submit();">Logout</a></li>
                         <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                             {{ csrf_field() }}
                         </form>
                     @endif
+
                 </ul>
             </div>
+            <!-- /.navbar-collapse -->
         </div>
+        <!-- /.container -->
     </nav>
 
-    @yield('content')
+    <div class="content">
+        @yield('content')
 
+    </div>
 </div>
 
 <footer class="footer">
@@ -79,6 +82,7 @@
 <!-- Scripts -->
 <script src="/thirdparty/jquery/jquery-3.1.1.min.js"></script>
 <script src="/thirdparty/bootstrap/js/bootstrap.min.js"></script>
+<script src="/js/grayscale.js"></script>
 @stack('scripts')
 
 </body>

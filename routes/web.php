@@ -15,7 +15,7 @@ Auth::routes();
 
 
 Route::any('/', function () {
-    return view('welcome');
+    return redirect('login');
 });
 
 Route::any('home', function () {
